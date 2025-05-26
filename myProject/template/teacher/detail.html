@@ -1,0 +1,22 @@
+{% extends "dashboard.html" %}
+
+{% block page_heading %}Teacher Details{% endblock %}
+
+{% block content %}
+<table class="table table-bordered">
+  <tr><th>Name</th><td>{{ teacher.name }}</td></tr>
+  <tr><th>Age</th><td>{{ teacher.age }}</td></tr>
+  <tr><th>Date of Birth</th><td>{{ teacher.date_of_birth }}</td></tr>
+  <tr><th>Address</th><td>{{ teacher.address }}</td></tr>
+  <tr>
+
+  </tr>
+</table>
+
+<a href="{% url 'teacher' %}" class="btn btn-secondary">Back to List</a>
+<a href="{% url 'teacher_edit' teacher.id %}" class="btn btn-warning">Edit</a>
+<form method="POST" action="{% url 'teacher_delete' teacher.id %}" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this teacher?');">
+ {% csrf_token %}
+  <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+</form>
+{% endblock %}

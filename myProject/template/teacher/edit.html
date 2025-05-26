@@ -1,0 +1,46 @@
+{% extends "dashboard.html" %}
+
+{% block content %}
+<form method="post" enctype="multipart/form-data" class="p-4 bg-white shadow rounded" >
+  {% csrf_token %}
+  {{ form.as_p }}
+  <h3 class="mb-4">Edit Teacher</h3>
+  
+  <div class="mb-3">
+    <label for="id_name" class="form-label">Name</label>
+    <input type="text" name="name" id="id_name" class="form-control" placeholder="Enter full name" value="{{ teacher.name }}">
+  </div>
+  
+  <div class="mb-3">
+    <label for="id_age" class="form-label">Age</label>
+    <input type="number" name="age" id="id_age" class="form-control" placeholder="Enter age" value="{{ teacher.age }}">
+  </div>
+  
+  <div class="mb-3">
+    <label for="id_date_of_birth" class="form-label">Date of Birth</label>
+<input type="date" name="date_of_birth" id="id_date_of_birth" class="form-control" value="{{ teacher.date_of_birth|date:'Y-m-d' }}">
+
+  </div>
+  
+  <div class="mb-3">
+  <label for="id_department" class="form-label">Department</label>
+  <select name="department" id="id_department" class="form-control">
+    <option value="">Select Department</option>
+    <option value="cse" {% if teacher.department == "cse" %}selected{% endif %}>CSE</option>
+    <option value="eee" {% if teacher.department == "eee" %}selected{% endif %}>EEE</option>
+    <option value="llb" {% if teacher.department == "llb" %}selected{% endif %}>LLB</option>
+    <option value="tex" {% if teacher.department == "tex" %}selected{% endif %}>TEX</option>
+  </select>
+</div>
+
+  <div class="mb-3">
+    <label for="id_address" class="form-label">Address</label>
+    <textarea name="address" id="id_address" class="form-control" placeholder="Enter address" rows="3">{{ teacher.address }}</textarea>
+  </div>
+
+  
+  <button type="submit" class="btn btn-primary">Update teacher</button>
+  <a href="{% url 'teacher' %}" class="btn btn-secondary ms-2">Cancel</a>
+</form>
+
+{% endblock %}
